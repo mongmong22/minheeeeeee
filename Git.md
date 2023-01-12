@@ -34,9 +34,7 @@ git이 관리할 필요가 없는 파일들을 둔다. 해당 폴더 안에 작�
 
 폴더 생성 후 마우스 우클릭 → Git bash here
 
-![Untitled](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/8c65ac89-06af-4c24-9789-193f1b05904e/Untitled.png)
-
-![Untitled](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/a8e6b0f9-e60f-4ca4-85c5-f1d10e2b6781/Untitled.png)
+**명령어**
 
 touch : 파일생성
 mkdir : 폴더를 생성
