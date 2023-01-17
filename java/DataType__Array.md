@@ -1,15 +1,20 @@
 # 자료형\_배열(Array)
 
-자료형 타입 바로 옆에 `[]`기호를 사용하여 표현한다. 특정 자료형의 집합이라고 보면 된다. 배열은 길이가 고정되어 있다.
+같은 종류의 데이터를 저장하기 위한 자료구조로 특정 자료형의 집합이라고 보면 된다. 배열은 길이가 고정되어 있어 길이를 임의로 변경할 수 없다. 배열을 객체로 취급한다(참조형).
 
-**배열의 생성** String[] / int[]
+배열에 들어있는 각 내용을 요소라고 한다. 각 요소에는 인덱스 번호를 가지고 접근할 수 있다.
+
+메모리가 들어갈 공간을 확보한 후 각 주소값을 가지고 접근하는 방식으로 작동한다. score는 각 요소가 아닌 주소값을 가지고 있다.
+
+**배열의 선언/생성** String[] / int[]
+
+자료형 타입 바로 옆에 `[]`기호를 사용하여 표현한다. 배열이름은 주로 arr 을 많이 사용한다.
 
 ```java
-// 배열을 생성할 때
-int[] odds = {1, 3, 5, 7, 9};
-String[] weeks = {"월", "화", "수", "목", "금", "토", "일"};
+int arr[] // 으로도 선언할 수 있으나 가독성을 위해 추천하지는 않는다.
 
-String[] weeks = new String[7];  // 배열의 길이 설정
+// 배열 생성(자료형의 초기값으로 초기화)
+String[] weeks = new String[7];  // 배열의 길이 설정 : int형의 경우 각각의 칸이 0으로 초기화된다.
 weeks[0] = "월";
 weeks[1] = "화";
 weeks[2] = "수";
@@ -17,26 +22,75 @@ weeks[3] = "목";
 weeks[4] = "금";
 weeks[5] = "토";
 weeks[6] = "일";
-  // String[] weeks = new String[];  // 길이에 대한 숫자값이 없으므로 컴파일 오류가 발
+	// String[] weeks = new String[];  // 길이에 대한 숫자값이 없으므로 컴파일 오류가 발생
+
+// 배열의 생성 및 값 초기화 (원하는 값으로 초기화 하는 경우)
+String[] weeks = new String[]{"월", "화", "수", "목", "금", "토", "일"};
+
+//선언과 초기화를 나눠서 할 수도 있음.
+int[] arr6;
+arr6 = new int[7];
+arr6 = {1,2,3,4,5};  //불가능. new없이 이렇게 나눠서쓰면 에러가 남.
+
+// 배열의 선언 및 초기화
+int[] odds = {1, 3, 5, 7, 9};
 ```
 
+초기화값을 정하지 않는 경우 0으로 초기화된다.(boolean은 false가 초기화값)
+
 **배열의 출력** Arrays.toString
-StringBuffer sb = new StringBuffer();
-sb.append("hello")
-sb.append(" ")
-sb.append("jump to java");
-String result = sb.toString();
-System.out.println(result); //"hello jump to java" 출력
-
-````
-
-- insert : 원하는 위치에 문자열 삽입이 가능하다.
 
 ```java
-StringBuffer sb = new StringBuffer();
-sb.append("jump to java");
-sb.insert(0,"hello")
-System.out.println(sb.toString());  //"hello jump to java" 출력
-````
+System.out.println(Arrays.toString(weeks)); // [월, 화, 수, 목, 금, 토, 일]
+```
 
-- substring : substring(시작위치, 끝위치) : StringBuffer 객체의 시작위치에서 끝위치까지의 문자를 뽑아낸다.
+- arr.length() : 배열의 길이를 조회할 수 있다.
+
+**빈도수 구하기**
+
+숫자의 출현횟수를 계산한다.
+
+### for-each
+
+가독성이 개선된 반복문으로 배열 및 Collections에서 사용한다.
+
+index대신 직접 요소에 접근하는 변수를 제공
+
+```java
+//기본 for문 : 범위를 설정하여 특정 요소만 사용할 수 있기 때문에 더 유용한 경우가 많다.
+for (int i=0; i<intArry.length; i++) {
+		int X = intArray[i];
+		System.out.println(x);
+}
+===================================================
+//for-each : 처음부터 끝까지 요소를 다 활용하려면 사용하기 좋지만 범위 설정X
+int intArray [] = {1,3,5,7,9};
+for (int x : intArray) {
+		System.out.println(x);
+}
+```
+
+### 다차원 배열
+
+2차원 이상의 배열을 의미. 행렬형식(표 형식)의 데이터를 저장하기 위한 배열로 1차원 배열이 여러개 있다고 보면 된다.
+배열을 요소로 가진다.
+
+**배열의 선언** int[][]
+
+```java
+int[][] arr1 = new int[2][3]  // 행과 열의 수를 지정
+
+// raggedArr 요소인 배열의 길이가 다를 수 있다.
+int[][] arr2 = new int[2][]  // 행만 선언하고 열은 선언X
+
+int[][] arr3 = { {90,80,85,100},
+								{100,75,80,50},
+								{60,100,90,85}};  // [3][4]인 배열. 초기화
+```
+
+### Arrays 클래스 (java.util.Arrays;)
+
+- Arrays.toString() : 배열에 저장된 내용을 문자열로 변환하여 [값1, 값2, 값3 …..] 형태로 출력. 2차원배열에서는 deepToString() 을 사용한다.
+- Arrays.equals(arr1, arr2) : 두 배열이 같은지 비교한다. 2차원에서는 deepEquals()를 사용한다.
+- Arrays.copyOf(arr,arr.length) : 배열을 복사하여 원하는 사이즈 만큼의 배열을 생성한다.
+- Arrays.sort(arr) : 배열을 정렬해준다.
